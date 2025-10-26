@@ -1,0 +1,149 @@
+<app-search-bar></app-search-bar>
+<div class="w-full py-16 bg-[#F9FAFB] font-poppins">
+  <div class="max-w-[1500px] mx-auto px-6 lg:px-12">
+    <div class="grid grid-cols-1 lg:grid-cols-5 gap-10 items-start">
+      <div
+        class="bg-[#F5F5F5] text-[#555] rounded-sm shadow-sm px-6 lg:col-span-1 h-full flex flex-col justify-between"
+      >
+        <h2 class="text-xl font-semibold text-gray-800 mb-4">Filters</h2>
+        <ul class="space-y-3 text-[15px] flex-1">
+          <li>
+            <button
+              (click)="togglePriceRange()"
+              class="hover:text-[#17A5C0] font-medium flex items-center justify-between w-full"
+            >
+              Price Range
+              <span [class.rotate-180]="showPriceRange" class="transition-transform duration-300">
+                ▼
+              </span>
+            </button>
+
+            <div
+              *ngIf="showPriceRange"
+              class="overflow-hidden transition-all duration-500 ease-in-out mt-3"
+            >
+              <div class="p-3 bg-gray-50 rounded-lg shadow-sm">
+                <label class="block text-sm mb-2 text-gray-600">Select Range:</label>
+                <div class="flex items-center gap-2">
+                  <input
+                    type="range"
+                    min="0"
+                    max="6000"
+                    [(ngModel)]="priceMax"
+                    (change)="onPriceRangeChange()"
+                    class="w-full accent-[#FEB854]"
+                  />
+                </div>
+                <div class="flex justify-between text-sm mt-2 text-gray-500">
+                  <span>$ {{ priceMax }}</span>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li><a href="#" class="hover:text-[#17A5C0]">Colors</a></li>
+          <li><a href="#" class="hover:text-[#17A5C0]">Reviews</a></li>
+          <li><a href="#" class="hover:text-[#17A5C0]">Graphics</a></li>
+          <li><a href="#" class="hover:text-[#17A5C0]">Guarantee</a></li>
+          <li><a href="#" class="hover:text-[#17A5C0]">Internal Storage</a></li>
+        </ul>
+      </div>
+
+      <div class="lg:col-span-4 flex flex-col h-full">
+        <div
+          *ngIf="brandData && !isLoading"
+          
+          class="p-6 mb-2 flex flex-col md:flex-row lg:flex-col gap-4 h-full justify-center mt-[-50px]"
+        >
+          <img
+            [src]="brandData.logo"
+            [alt]="brandData.title"
+            class="w-44 h-32 object-contain p-3"
+            
+          />
+          <div class="text-center md:text-left">
+            <p class="text-[#969595] leading-relaxed text-sm">{{ brandData.description }}</p>
+          </div>
+        </div>
+
+        <div
+          class="flex flex-col md:flex-row justify-between items-center text-sm text-gray-600 mb-6"
+        >
+          <p>
+            <label class="text-gray-600 text-sm">
+              Sort By:
+              <select
+                class="ml-2 border rounded px-2 py-1 text-sm"
+                [(ngModel)]="sortOption"
+                (change)="sortProducts()"
+              >
+                <option value="az">A to Z</option>
+                <option value="za">Z to A</option>
+              </select>
+            </label>
+          </p>
+          <p>
+            Showing:
+            <span class="font-medium text-gray-800">{{ startIndex }}–{{ endIndex }}</span> of
+            {{ totalResults }} Results
+          </p>
+        </div>
+
+        <div *ngIf="isLoading" class="flex flex-col items-center justify-center py-20">
+          <fa-icon [icon]="faSpinner" class="text-[#FEB854] text-6xl animate-spin"></fa-icon>
+          <p class="text-gray-500 mt-4 text-md font-medium">Fetching brand products...</p>
+        </div>
+
+        <div
+          *ngIf="!isLoading"
+          class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 place-items-center"
+        >
+          @for (product of filteredProducts; track product.id) {
+          <div
+          
+            class="w-full max-w-sm border border-gray-200 rounded-2xl shadow-sm bg-white overflow-hidden hover:shadow-lg transition-all duration-300"
+          >
+            <img
+              [src]="product.images?.additional_images?.[0]"
+              alt="{{ product.title }}"
+              class="w-full h-52 object-contain bg-gray-100 cursor-pointer"
+              (click)="navigateToProduct(product)"
+            />
+
+            <div class="p-5 text-left">
+              <h3 class="text-gray-900 text-lg font-semibold line-clamp-2">{{ product.title }}</h3>
+
+              <div class="flex items-center mt-2">
+                <fa-icon class="text-md text-[#FEB854]" [icon]="faStar"></fa-icon>
+                <span class="ml-2 text-gray-700 font-medium text-sm">
+                  {{ product.overAllRating }} / 5
+                </span>
+              </div>
+
+              <div class="flex justify-between items-center mt-4">
+                <p class="text-gray-800 text-md font-semibold">
+                  <span class="text-gray-600 font-normal">Price:</span>
+                  ${{ product.price?.[0]?.amount }}
+                </p>
+                <button
+                  class="border border-[#FEB854] text-[#FEB854] hover:bg-[#FEB854] hover:text-white rounded-lg px-3 py-1.5 text-sm font-medium transition-all duration-300"
+                >
+                  Compare Price
+                </button>
+              </div>
+            </div>
+          </div>
+          }
+        </div>
+
+        <div class="mt-6" *ngIf="totalResults > 0">
+          <app-pagination
+            [totalItems]="totalResults"
+            [itemsPerPage]="perPage"
+            [currentPage]="pageNo"
+            (currentPageChange)="onPageChange($event)"
+          ></app-pagination>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,38 @@
+<section class="w-full bg-[#38149E08] flex items-center justify-center px-4 sm:px-6 lg:px-12 py-20">
+  <div
+    class="container mx-auto flex flex-col items-center justify-center text-center space-y-6 max-w-4xl"
+  >
+    <h1
+      class="text-gray-800 font-bold text-[20px] sm:text-[15px] md:text-[50px] lg:text-[55px] leading-tight"
+    >
+      SEARCH & COMPARE OVER
+      <span class="text-[#FEB854]">MILLIONS</span> OF PRODUCTS
+    </h1>
+
+    <div class="flex flex-col sm:flex-row gap-2 w-full max-w-2xl justify-center mt-6">
+      <select
+        class="bg-white px-3 py-7 sm:py-4 text-gray-600 text-sm sm:text-base border border-gray-300 rounded-3xl sm:rounded-r-none sm:border-r-0 focus:ring-2 focus:ring-[#FEB854] focus:outline-none"
+      >
+        <option selected disabled>All Categories</option>
+        @for(product of selectProducts; track product.id){
+        <option>Mobiles</option>
+        <option>Laptops</option>
+        <option>Monitors</option>
+        <option>Desktops</option>
+        }
+      </select>
+
+      <input
+        type="text"
+        placeholder="Search anything..."
+        class="flex-1 px-3 py-3 sm:py-4 text-sm sm:text-base border border-gray-300 focus:ring-2 focus:ring-[#FEB854] focus:outline-none"
+      />
+
+      <button
+        class="px-5 sm:px-6 py-3 sm:py-4 bg-[#FEB854] text-white font-medium rounded-3xl sm:rounded-l-none hover:bg-[#f6a934] transition text-base flex items-center justify-center"
+      >
+        <fa-icon [icon]="faMagnifyingGlass" class="text-xl"></fa-icon>
+      </button>
+    </div>
+  </div>
+</section>

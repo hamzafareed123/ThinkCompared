@@ -1,0 +1,116 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "title": "MacBook Pro 14\" M3",
+      "category": "Laptops",
+      "price": 1999,
+      "rating": 4.7,
+      "thumbnail": "https://plus.unsplash.com/premium_photo-1661662850226-83c981ed4eba?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1332"
+    },
+    {
+      "id": 2,
+      "title": "Dell XPS 13",
+      "category": "Laptops",
+      "price": 1299,
+      "rating": 4.5,
+      "thumbnail": "https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1170"
+    },
+    {
+      "id": 3,
+      "title": "HP Spectre x360",
+      "category": "Laptops",
+      "price": 1399,
+      "rating": 4.6,
+      "thumbnail": "https://images.unsplash.com/photo-1511385348-a52b4a160dc2?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1207"
+    },
+    {
+      "id": 4,
+      "title": "Lenovo ThinkPad X1 Carbon",
+      "category": "Laptops",
+      "price": 1499,
+      "rating": 4.8,
+      "thumbnail": "https://images.unsplash.com/photo-1577375729152-4c8b5fcda381?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=880"
+    },
+    {
+      "id": 5,
+      "title": "iPhone 15 Pro",
+      "category": "Mobiles",
+      "price": 1099,
+      "rating": 4.9,
+      "thumbnail": "https://images.unsplash.com/photo-1697284959152-32ef13855932?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=880"
+    },
+    {
+      "id": 6,
+      "title": "Samsung Galaxy S24 Ultra",
+      "category": "Mobiles",
+      "price": 1199,
+      "rating": 4.8,
+      "thumbnail": "https://images.unsplash.com/photo-1705585174953-9b2aa8afc174?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=732"
+    },
+    {
+      "id": 7,
+      "title": "Google Pixel 8 Pro",
+      "category": "Mobiles",
+      "price": 999,
+      "rating": 4.7,
+      "thumbnail": "https://images.unsplash.com/photo-1659079478237-3a48864e08a9?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1170"
+    },
+    {
+      "id": 8,
+      "title": "OnePlus 12",
+      "category": "Mobiles",
+      "price": 899,
+      "rating": 4.6,
+      "thumbnail": "https://media.wired.com/photos/65af0355a73d6dedff595b7d/master/w_1920,c_limit/Gear-OnePlus-12-SOURCE-Julian-Chokkattu.jpg"
+    },
+    {
+      "id": 9,
+      "title": "Samsung Odyssey G7 32\"",
+      "category": "Monitors",
+      "price": 499,
+      "rating": 4.8,
+      "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYZwVjZ5H2941PtHrtrK-b3A4kJvwh9mwa_g&s"
+    },
+    {
+      "id": 10,
+      "title": "LG UltraFine 27\" 5K",
+      "category": "Monitors",
+      "price": 899,
+      "rating": 4.5,
+      "thumbnail": "https://m.media-amazon.com/images/I/718bIdYZ7-L._AC_UF350,350_QL80_.jpg"
+    },
+    {
+      "id": 11,
+      "title": "Dell UltraSharp 34\" Curved",
+      "category": "Monitors",
+      "price": 999,
+      "rating": 4.7,
+      "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSOmtM7fZlBBcMA3W5EdOARinXh1k14riwqQg&s"
+    },
+    {
+      "id": 12,
+      "title": "Gaming Desktop Ryzen 9",
+      "category": "Desktops",
+      "price": 1799,
+      "rating": 4.6,
+      "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS08fskA9oNMsiu0Cw4BhL6GsJLu0SIXkBG4Q&s"
+    },
+    {
+      "id": 13,
+      "title": "Apple iMac 24\" M3",
+      "category": "Desktops",
+      "price": 1599,
+      "rating": 4.8,
+      "thumbnail": "https://www.apple.com/newsroom/images/2023/10/apple-supercharges-24-inch-imac-with-new-m3-chip/article/Apple-iMac-M3-Photoshop-231030_big.jpg.large.jpg"
+    },
+    {
+      "id": 14,
+      "title": "Alienware Aurora R16",
+      "category": "Desktops",
+      "price": 2199,
+      "rating": 4.7,
+      "thumbnail": "https://cdn.mos.cms.futurecdn.net/LRJKzQXUgkfZiRpX9GJxEU.jpg"
+    }
+  ]
+}

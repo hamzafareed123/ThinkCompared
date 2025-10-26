@@ -1,0 +1,65 @@
+<div class="w-full mt-20 flex flex-col items-center justify-center bg-[#38149E08] py-10">
+  <div class="text-gray-700 text-center w-full max-w-7xl px-4">
+    <div class="max-w-3xl mx-auto">
+      <h1 class="text-[#595B5C] text-3xl md:text-4xl font-semibold">HOT DEALS</h1>
+      <p class="text-[16px] md:text-[18px] mt-3 text-gray-600">
+        Explore the best deals of this week — top-rated picks just for you!
+      </p>
+    </div>
+
+    <div *ngIf="isLoading" class="flex flex-col items-center justify-center mt-16">
+      <fa-icon [icon]="faSpinner" class="text-[#FEB854] text-5xl animate-spin"></fa-icon>
+      <p class="text-gray-500 mt-3 text-md font-medium">Fetching the hottest deals...</p>
+    </div>
+
+    <div
+      *ngIf="!isLoading"
+      class="mt-12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 place-items-center"
+    >
+      @for (product of specificProducts; track product.id) {
+      <div
+        class="w-full max-w-sm border border-gray-200 rounded-2xl shadow-sm bg-white overflow-hidden"
+      >
+        <img
+          src="{{ product.images?.additional_images[0] }}"
+          alt="{{ product.title }}"
+          class="w-full h-52 object-contain bg-gray-100"
+        />
+
+        <div class="p-5 text-left">
+          <h3 class="text-gray-900 text-lg font-semibold line-clamp-2">
+            {{ product.title }}
+          </h3>
+
+          <div class="flex items-center justify-start mt-2 text-yellow-500 text-sm">
+            <fa-icon class="text-md text-[#FEB854]" [icon]="faStar"></fa-icon>
+            <span class="text-gray-700 font-medium"> {{ product.overAllRating }} / 5 </span>
+          </div>
+
+          <div class="flex flex-row justify-between items-center mt-4">
+            <p class="text-gray-800 text-md font-semibold">
+              <span class="text-gray-600 font-normal">Price:</span> $
+              {{ product.price[0]?.amount }}
+            </p>
+
+            <button
+              [routerLink]="['/product', product.id]"
+              class="border border-[#FEB854] text-[#FEB854] hover:bg-[#FEB854] hover:text-white rounded-lg px-3 py-1.5 text-md font-medium transition-all duration-300"
+            >
+              Compare Price
+            </button>
+          </div>
+        </div>
+      </div>
+      }
+    </div>
+
+    <div class="mt-12" *ngIf="!isLoading">
+      <button
+        class="py-3 px-8 text-md rounded-full bg-[#FEB854] text-white hover:bg-[#f6ad36] transition-all duration-300 shadow-sm"
+      >
+        See All Products
+      </button>
+    </div>
+  </div>
+</div>

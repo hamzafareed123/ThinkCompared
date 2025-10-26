@@ -1,0 +1,184 @@
+<mat-sidenav-container class="h-[calc(100vh-64px)] relative">
+
+  <mat-sidenav
+    #drawer
+    mode="side"
+    position="end"
+    class="w-[500px]"
+    (opened)="drawerOpened = true"
+    (closed)="drawerOpened = false"
+  >
+    <app-compare-box
+      [products]="compareProducts"
+      (removeProduct)="removeFromCompare($event)"
+      [productMessage]="productMessage"
+      (closeDrawer)="drawer.close()"
+    ></app-compare-box>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <div class="w-full py-16 bg-[#F9FAFB] font-poppins">
+      <div class="max-w-[1500px] mx-auto px-6 lg:px-12">
+        <div class="grid grid-cols-1 lg:grid-cols-5 gap-10">
+       
+          <div class="bg-[#F5F5F5] text-[#555] rounded-sm shadow-sm p-6 lg:col-span-1">
+            <h2 class="text-xl font-semibold text-gray-800 mb-4">Filters</h2>
+            <ul class="space-y-3 text-[15px]">
+              <li>
+                <button
+                  (click)="togglePriceRange()"
+                  class="hover:text-[#17A5C0] font-medium flex items-center justify-between w-full"
+                >
+                  Price Range
+                  <span
+                    [class.rotate-180]="showPriceRange"
+                    class="transition-transform duration-300"
+                  >
+                    ▼
+                  </span>
+                </button>
+
+                <div *ngIf="showPriceRange" class="mt-3">
+                  <div class="p-3 bg-gray-50 rounded-lg shadow-sm">
+                    <label class="block text-sm mb-2 text-gray-600">Select Range:</label>
+                    <input
+                      type="range"
+                      min="0"
+                      max="6000"
+                      [(ngModel)]="priceMax"
+                      (change)="onPriceRangeChange()"
+                      class="w-full accent-[#FEB854]"
+                    />
+                    <div class="flex justify-between text-sm mt-2 text-gray-500">
+                      <span>$ {{ priceMax }}</span>
+                    </div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+
+   
+          <div class="lg:col-span-4">
+       
+            <div class="flex flex-col md:flex-row justify-between items-center text-sm text-gray-600 mb-6">
+              <p>
+                <label class="text-gray-600 text-sm">
+                  Sort By:
+                  <select
+                    class="ml-2 border rounded px-2 py-1 text-sm"
+                    [(ngModel)]="sortOption"
+                    (change)="sortProducts()"
+                  >
+                    <option value="az">A to Z</option>
+                    <option value="za">Z to A</option>
+                  </select>
+                </label>
+              </p>
+
+              <p>
+                Showing:
+                <span class="font-medium text-gray-800">{{ startIndex }}–{{ endIndex }}</span>
+                of {{ totalResults }} Results
+              </p>
+            </div>
+
+      
+            <div *ngIf="isLoading" class="flex flex-col items-center justify-center py-20">
+              <fa-icon [icon]="faSpinner" class="text-[#FEB854] text-6xl animate-spin"></fa-icon>
+              <p class="text-gray-500 mt-4 text-md font-medium">Fetching filtered products...</p>
+            </div>
+
+            <div
+              *ngIf="!isLoading"
+              class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 place-items-center"
+            >
+              <div
+                *ngFor="let product of filteredProducts"
+                class="group relative w-full max-w-sm border border-gray-200 rounded-2xl shadow-sm bg-white overflow-hidden hover:shadow-lg transition-all duration-300"
+              >
+
+                <img
+                  [src]="product.images?.additional_images?.[0]"
+                  alt="{{ product.title }}"
+                  class="w-full h-56 object-contain bg-gray-100 cursor-pointer"
+                  (click)="navigateToProduct(product)"
+                />
+
+        
+                <div
+                  *ngIf="drawerOpened"
+                  class="absolute inset-0 flex items-center justify-center opacity-0 translate-y-7 group-hover:opacity-100 group-hover:translate-y-7 transition-all duration-300 ease-in-out"
+                >
+                  <div
+                    class="bg-black backdrop-blur-md text-white px-4 py-3 rounded-lg flex justify-center w-[80%] -translate-y-10"
+                  >
+                    <button
+                      (click)="toggleCompare(product); $event.stopPropagation()"
+                      class="w-full text-sm  text-white py-2 rounded-md font-medium transition-all duration-300"
+                      [ngClass]="{
+                        'bg-black text-white ': !isInCompare(product),
+                        'bg-black text-white': isInCompare(product)
+                      }"
+                    >
+                      {{ isInCompare(product) ? 'Remove from Compare' : 'Add to Compare' }}
+                    </button>
+                  </div>
+                </div>
+
+         
+                <div class="p-5 text-left">
+                  <h3 class="text-gray-900 text-lg font-semibold line-clamp-2">
+                    {{ product.title }}
+                  </h3>
+
+                  <div class="flex items-center mt-2">
+                    <fa-icon class="text-md text-[#FEB854]" [icon]="faStar"></fa-icon>
+                    <span class="ml-2 text-gray-700 font-medium text-sm">
+                      {{ product.overAllRating }} / 5
+                    </span>
+                  </div>
+
+                  <div class="flex justify-between items-center mt-4">
+                    <p class="text-gray-800 text-md font-semibold">
+                      <span class="text-gray-600 font-normal">Price:</span>
+                      ${{ product.price?.[0]?.amount }}
+                    </p>
+
+   
+                    <button
+                      (click)="toggleCompare(product)"
+                      class="border border-[#FEB854] text-[#FEB854] hover:bg-[#FEB854] hover:text-white rounded-lg px-4 py-2 text-sm font-medium transition-all duration-300"
+                      *ngIf="!drawerOpened"
+                    >
+                      {{ isInCompare(product) ? 'Added' : 'Compare' }}
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+         
+            <div class="mt-6">
+              <app-pagination
+                [totalItems]="totalResults"
+                [itemsPerPage]="perPage"
+                [currentPage]="pageNo"
+                (currentPageChange)="onPageChange($event)"
+              ></app-pagination>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <button
+      mat-fab
+      class="!fixed bottom-6 left-20 !bg-[#d9a846] hover:!bg-[#e4b84a] text-white transition-all duration-300 shadow-xl hover:shadow-2xl rounded-full p-3 flex items-center justify-center"
+      (click)="toggleDrawer()"
+    >
+      <mat-icon class="text-white text-[26px]">auto_awesome_motion</mat-icon>
+    </button>
+  </mat-sidenav-content>
+</mat-sidenav-container>

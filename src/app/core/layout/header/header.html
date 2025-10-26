@@ -1,0 +1,94 @@
+<nav class="w-full bg-[#38149E08] top-0 z-50 shadow-md font-poppins">
+  <div
+    class="container mx-auto px-6 py-4 flex items-center justify-between lg:justify-start lg:gap-50 md:gap-16 gap-6"
+  >
+    <a routerLink=""><div class="flex items-center space-x-3">
+      <img src="\logo.png" class="w-[150px] md:w-[200px] object-contain" alt="Logo" />
+    </div></a>
+
+    <ul class="hidden md:flex items-center space-x-10 text-gray-700 font-medium">
+      <li routerLink="/" class="hover:text-[#FEB854] transition-colors cursor-pointer">Home</li>
+      <li routerLink="/category" class="hover:text-[#FEB854] transition-colors cursor-pointer">
+        Category
+      </li>
+      <li
+        routerLink="/products"
+        class="hover:text-red-800 text-red-500 transition-colors cursor-pointer"
+      >
+        Hot Deals
+      </li>
+      <li routerLink="/about-us" class="hover:text-[#FEB854] transition-colors cursor-pointer">
+        About Us
+      </li>
+      <li routerLink="/contact-us" class="hover:text-[#FEB854] transition-colors cursor-pointer">
+        Contact Us
+      </li>
+
+      <li class="relative">
+        <div
+          class="flex items-center space-x-1 text-[#FEB854] cursor-pointer hover:text-[#f6a934]"
+          (click)="toggleAccountMenu()"
+        >
+          <ng-template #guestUser>
+            <a routerLink="/signin">My Account</a>
+          </ng-template>
+          <fa-icon class="text-xl" [icon]="faUser"></fa-icon>
+        </div>
+
+        <div
+          *ngIf="loggedInUser && showAccountMenu"
+          class="absolute top-full right-0 mt-2 bg-white text-gray-700 shadow-md rounded-lg px-4 py-2 transition-opacity duration-200"
+        >
+          <button (click)="logout()" class="hover:text-red-500 transition">Logout</button>
+        </div>
+      </li>
+    </ul>
+
+    <button
+      (click)="toggleMenu()"
+      class="md:hidden flex items-center text-gray-700 focus:outline-none ml-auto"
+    >
+      <fa-icon class="text-xl text-[#FEB854]" [icon]="faBars"></fa-icon>
+    </button>
+  </div>
+
+  <div
+    *ngIf="isMenuOpen"
+    class="md:hidden bg-white text-center items-center border-t border-gray-200 shadow-inner animate-slide-down"
+  >
+    <ul class="flex flex-col space-y-4 p-4 text-gray-700 font-medium">
+      <li routerLink="/" class="hover:text-[#FEB854] transition-colors cursor-pointer">Home</li>
+      <li routerLink="/category" class="hover:text-[#FEB854] transition-colors cursor-pointer">
+        Category
+      </li>
+      <li routerLink="/products" class="hover:text-[#FEB854] transition-colors cursor-pointer">
+        Hot Deals
+      </li>
+      <li routerLink="/about-us" class="hover:text-[#FEB854] transition-colors cursor-pointer">
+        About Us
+      </li>
+      <li routerLink="/contact-us" class="hover:text-[#FEB854] transition-colors cursor-pointer">
+        Contact Us
+      </li>
+
+      <li class="relative">
+        <div
+          class="flex items-center justify-center space-x-1 text-[#FEB854] cursor-pointer hover:text-[#f6a934]"
+          (click)="toggleAccountMenu()"
+        >
+          <ng-template #guestUserMobile>
+            <a routerLink="/signin">My Account</a>
+          </ng-template>
+          <fa-icon class="text-xl" [icon]="faUser"></fa-icon>
+        </div>
+
+        <div
+          *ngIf="loggedInUser && showAccountMenu"
+          class="absolute top-full left-1/2 -translate-x-1/2 mt-2 bg-white text-gray-700 shadow-md rounded-lg px-4 py-2"
+        >
+          <button (click)="logout()" class="hover:text-red-500 transition">Logout</button>
+        </div>
+      </li>
+    </ul>
+  </div>
+</nav>

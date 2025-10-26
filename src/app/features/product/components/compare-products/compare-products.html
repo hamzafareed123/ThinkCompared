@@ -1,0 +1,103 @@
+<div class="p-6 md:p-10 bg-gray-50 min-h-screen font-poppins">
+  <div class="text-center mb-10">
+    <h1 class="text-3xl font-bold text-gray-900">Comparison</h1>
+    <h3 class="text-lg text-gray-600 mt-2">Search your way through top sellers</h3>
+  </div>
+
+  <div
+    *ngIf="products.length > 0; else noProducts"
+    class="bg-white rounded-xl shadow-lg overflow-x-auto"
+  >
+    <div class="min-w-[600px] md:min-w-full p-6">
+      <table class="w-full border border-gray-200 text-center table-fixed">
+        <tr class="border-b border-gray-300">
+          <td class="w-1/4 text-left font-semibold text-gray-700 py-3 px-4"></td>
+          <td *ngFor="let product of products" class="p-4 border-l border-gray-300">
+            <div class="relative flex flex-col items-center">
+              <button
+                class="absolute top-1 right-[calc(50%-8rem)] bg-gray-400 rounded-full p-1 cursor-pointer text-white transition"
+                (click)="removeProduct(product)"
+              >
+                <fa-icon class="text-sm sm:text-sm" [icon]="faTimes"></fa-icon>
+              </button>
+
+              <img
+                [src]="product.images?.additional_images?.[0] || 'https://via.placeholder.com/150'"
+                [alt]="product.title"
+                class="h-28 w-28 sm:h-32 sm:w-32 object-contain mx-auto rounded-lg"
+              />
+            </div>
+          </td>
+        </tr>
+
+        <tr class="border-b border-gray-300">
+          <th class="text-left text-gray-600 text-base sm:text-lg font-semibold py-3 px-4">Name</th>
+          <td
+            *ngFor="let product of products"
+            class="py-3 px-4 border-l border-gray-300 text-gray-700 text-sm truncate max-w-[200px] sm:max-w-[250px]"
+            [title]="product.title"
+          >
+            {{ product.title }}
+          </td>
+        </tr>
+
+        <tr class="border-b border-gray-300">
+          <th class="text-left text-gray-600 text-base sm:text-lg font-semibold py-3 px-4">
+            Brand
+          </th>
+          <td
+            *ngFor="let product of products"
+            class="py-3 px-4 border-l border-gray-300 text-gray-700 text-sm"
+          >
+            {{ product.brand }}
+          </td>
+        </tr>
+
+        <tr class="border-b border-gray-300">
+          <th class="text-left text-gray-600 text-base sm:text-lg font-semibold py-3 px-4">
+            Condition
+          </th>
+          <td
+            *ngFor="let product of products"
+            class="py-3 px-4 border-l border-gray-300 text-gray-700 text-sm"
+          >
+            {{ product.condition }}
+          </td>
+        </tr>
+
+        <tr class="border-b border-gray-300">
+          <th class="text-left text-gray-600 text-base sm:text-lg font-semibold py-3 px-4">
+            Rating
+          </th>
+          <td
+            *ngFor="let product of products"
+            class="py-3 px-4 border-l border-gray-300 text-gray-700 text-sm"
+          >
+            {{ product.overAllRating || 'N/A' }}
+          </td>
+        </tr>
+
+        <tr>
+          <th class="text-left text-gray-600 text-base sm:text-lg font-semibold py-3 px-4">
+            Price
+          </th>
+          <td
+            *ngFor="let product of products"
+            class="py-3 px-4 border-l border-gray-300 text-gray-700 text-sm"
+          >
+            {{ product.price?.[0]?.symbol }}{{ product.price?.[0]?.amount }}
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <ng-template #noProducts>
+    <div class="text-center mt-20 text-gray-600 text-base">
+      You haven’t added any products to compare yet.
+    </div>
+  </ng-template>
+</div>
+
+<app-best-seller></app-best-seller>
+<app-help-section></app-help-section>
