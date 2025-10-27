@@ -1,94 +1,98 @@
 <nav class="w-full bg-[#38149E08] top-0 z-50 shadow-md font-poppins">
-  <div
-    class="container mx-auto px-6 py-4 flex items-center justify-between lg:justify-start lg:gap-50 md:gap-16 gap-6"
-  >
-    <a routerLink=""><div class="flex items-center space-x-3">
-      <img src="\logo.png" class="w-[150px] md:w-[200px] object-contain" alt="Logo" />
-    </div></a>
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16 lg:h-20">
+      <!-- left: logo -->
+      <div class="flex items-center lg:pl-10">
+        <a routerLink="/" class="flex items-center">
+          <img src="/logo.png" alt="Logo"
+               class="w-[120px] sm:w-[140px] md:w-[160px] lg:w-[200px] object-contain" />
+        </a>
+      </div>
 
-    <ul class="hidden md:flex items-center space-x-10 text-gray-700 font-medium">
-      <li routerLink="/" class="hover:text-[#FEB854] transition-colors cursor-pointer">Home</li>
-      <li routerLink="/category" class="hover:text-[#FEB854] transition-colors cursor-pointer">
-        Category
-      </li>
-      <li
-        routerLink="/products"
-        class="hover:text-red-800 text-red-500 transition-colors cursor-pointer"
-      >
-        Hot Deals
-      </li>
-      <li routerLink="/about-us" class="hover:text-[#FEB854] transition-colors cursor-pointer">
-        About Us
-      </li>
-      <li routerLink="/contact-us" class="hover:text-[#FEB854] transition-colors cursor-pointer">
-        Contact Us
-      </li>
+      <!-- center / desktop menu -->
+      <div class="hidden md:flex md:items-center md:space-x-6 lg:space-x-8">
+        <a routerLink="/" class="text-sm text-gray-700 hover:text-[#FEB854]">Home</a>
+        <a routerLink="/category" class="text-sm text-gray-700 hover:text-[#FEB854]">Category</a>
+        <a routerLink="/products" class="text-sm text-red-500 hover:text-red-700">Hot Deals</a>
+        <a routerLink="/about-us" class="text-sm text-gray-700 hover:text-[#FEB854]">About Us</a>
+        <a routerLink="/contact-us" class="text-sm text-gray-700 hover:text-[#FEB854]">Contact Us</a>
+      </div>
 
-      <li class="relative">
-        <div
-          class="flex items-center space-x-1 text-[#FEB854] cursor-pointer hover:text-[#f6a934]"
-          (click)="toggleAccountMenu()"
-        >
-          <ng-template #guestUser>
-            <a routerLink="/signin">My Account</a>
-          </ng-template>
-          <fa-icon class="text-xl" [icon]="faUser"></fa-icon>
+      <!-- right: account + mobile button -->
+      <div class="flex items-center space-x-4">
+        <!-- account (desktop) -->
+        <div class="hidden md:block relative">
+          <button
+            (click)="toggleAccountMenu()"
+            (keydown.enter)="toggleAccountMenu()"
+            aria-haspopup="true"
+            [attr.aria-expanded]="showAccountMenu"
+            class="flex items-center space-x-2 text-sm text-gray-700 hover:text-[#FEB854] focus:outline-none"
+          >
+            <fa-icon [icon]="faUser" class="text-md"></fa-icon>
+            <span *ngIf="isLoggedIn; else guest">{{ userName }}</span>
+            <ng-template #guest>
+              <a routerLink="/auth/signup" class="text-sm hover:text-[#FEB854]">Sign in / Register</a>
+            </ng-template>
+          </button>
+
+          <!-- account dropdown -->
+          <div
+            *ngIf="isLoggedIn && showAccountMenu"
+            class="absolute right-0 mt-2 w-40 bg-white text-gray-700 rounded-lg shadow-md py-2 z-20"
+          >
+            <button class="block w-full text-left px-4 py-2 hover:text-[#FEB854]">My Profile</button>
+            <button (click)="logout()" class="block w-full text-left px-4 py-2 hover:text-red-500">Logout</button>
+          </div>
         </div>
 
-        <div
-          *ngIf="loggedInUser && showAccountMenu"
-          class="absolute top-full right-0 mt-2 bg-white text-gray-700 shadow-md rounded-lg px-4 py-2 transition-opacity duration-200"
+        <!-- mobile hamburger -->
+        <button
+          (click)="toggleMenu()"
+          aria-label="Open menu"
+          [attr.aria-expanded]="isMenuOpen"
+          class="md:hidden inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-[#FEB854] focus:outline-none"
         >
-          <button (click)="logout()" class="hover:text-red-500 transition">Logout</button>
-        </div>
-      </li>
-    </ul>
-
-    <button
-      (click)="toggleMenu()"
-      class="md:hidden flex items-center text-gray-700 focus:outline-none ml-auto"
-    >
-      <fa-icon class="text-xl text-[#FEB854]" [icon]="faBars"></fa-icon>
-    </button>
+          <fa-icon [icon]="isMenuOpen ? faTimes : faBars" class="text-xl text-[#FEB854]"></fa-icon>
+        </button>
+      </div>
+    </div>
   </div>
 
+  <!-- mobile menu (collapsible) -->
   <div
     *ngIf="isMenuOpen"
-    class="md:hidden bg-white text-center items-center border-t border-gray-200 shadow-inner animate-slide-down"
+    class="md:hidden bg-white border-t border-gray-200 shadow-inner"
+    role="menu"
   >
-    <ul class="flex flex-col space-y-4 p-4 text-gray-700 font-medium">
-      <li routerLink="/" class="hover:text-[#FEB854] transition-colors cursor-pointer">Home</li>
-      <li routerLink="/category" class="hover:text-[#FEB854] transition-colors cursor-pointer">
-        Category
-      </li>
-      <li routerLink="/products" class="hover:text-[#FEB854] transition-colors cursor-pointer">
-        Hot Deals
-      </li>
-      <li routerLink="/about-us" class="hover:text-[#FEB854] transition-colors cursor-pointer">
-        About Us
-      </li>
-      <li routerLink="/contact-us" class="hover:text-[#FEB854] transition-colors cursor-pointer">
-        Contact Us
-      </li>
+    <div class="px-6 pt-4 pb-6">
+      <ul class="space-y-4 text-left">
+        <li><a routerLink="/" (click)="closeMenu()" class="block text-gray-700 hover:text-[#FEB854]">Home</a></li>
+        <li><a routerLink="/category" (click)="closeMenu()" class="block text-gray-700 hover:text-[#FEB854]">Category</a></li>
+        <li><a routerLink="/products" (click)="closeMenu()" class="block text-red-500 hover:text-red-700">Hot Deals</a></li>
+        <li><a routerLink="/about-us" (click)="closeMenu()" class="block text-gray-700 hover:text-[#FEB854]">About Us</a></li>
+        <li><a routerLink="/contact-us" (click)="closeMenu()" class="block text-gray-700 hover:text-[#FEB854]">Contact Us</a></li>
 
-      <li class="relative">
-        <div
-          class="flex items-center justify-center space-x-1 text-[#FEB854] cursor-pointer hover:text-[#f6a934]"
-          (click)="toggleAccountMenu()"
-        >
-          <ng-template #guestUserMobile>
-            <a routerLink="/signin">My Account</a>
-          </ng-template>
-          <fa-icon class="text-xl" [icon]="faUser"></fa-icon>
-        </div>
+        <li class="pt-2 border-t border-gray-100">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+              <fa-icon [icon]="faUser" class="text-xl text-[#FEB854]"></fa-icon>
+              <div>
+                <div *ngIf="isLoggedIn; else mobileGuest" class="text-sm font-medium text-gray-800">
+                  {{ userName }}
+                </div>
+                <ng-template #mobileGuest>
+                  <a routerLink="/auth/signup" (click)="closeMenu()" class="text-sm text-gray-700 hover:text-[#FEB854]">Sign in / Register</a>
+                </ng-template>
+              </div>
+            </div>
 
-        <div
-          *ngIf="loggedInUser && showAccountMenu"
-          class="absolute top-full left-1/2 -translate-x-1/2 mt-2 bg-white text-gray-700 shadow-md rounded-lg px-4 py-2"
-        >
-          <button (click)="logout()" class="hover:text-red-500 transition">Logout</button>
-        </div>
-      </li>
-    </ul>
+            <div *ngIf="isLoggedIn">
+              <button (click)="logout(); closeMenu()" class="text-sm text-red-500 hover:underline">Logout</button>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
   </div>
 </nav>

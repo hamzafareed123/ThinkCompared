@@ -1,0 +1,73 @@
+<div class="mt-20 flex items-center justify-center bg-[#f8fafc] font-poppins">
+  <div class="bg-white shadow-lg rounded-2xl p-6 w-full max-w-md border border-gray-100">
+    <h1 class="text-xl font-bold text-center text-gray-600 mb-8">
+      Welcome! Sign In To Your Account
+    </h1>
+
+    <form #userLoginForm="ngForm" (ngSubmit)="login(userLoginForm)" class="space-y-5">
+    
+      <div>
+        <label class="block text-sm text-gray-600 mb-1">Email</label>
+        <input
+          #email="ngModel"
+          ngModel
+          required
+          name="email"
+          type="email"
+          placeholder="Enter your email"
+          class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#00b4d8]"
+        />
+        <span *ngIf="email.invalid && email.touched" class="text-red-500 text-sm">
+          Email is required
+        </span>
+      </div>
+
+
+      <div>
+        <label class="block text-sm  text-gray-600 mb-1">Password</label>
+        <input
+          #password="ngModel"
+          ngModel
+          required
+          name="password"
+          type="password"
+          minlength="3"
+          maxlength="11"
+          placeholder="Enter your password"
+          class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#00b4d8]"
+        />
+
+        <span *ngIf="password.invalid && password.touched" class="text-red-500 text-sm">
+          Password is required
+        </span>
+        <span
+          *ngIf="password.errors?.['minlength'] || password.errors?.['maxlength']"
+          class="text-red-500 text-sm block"
+        >
+          Password should be between 3 and 11 characters
+        </span>
+      </div>
+
+      <button
+        [disabled]="userLoginForm.invalid"
+        class="w-full bg-[#FEB854] text-white py-2 rounded-lg font-semibold hover:bg-[#855614] transition disabled:opacity-50 disabled:cursor-not-allowed"
+      >
+        Login
+      </button>
+
+  
+      <div class="flex justify-center mt-4">
+        <div id="googleButton"></div>
+      </div>
+
+      <span class="text-sm text-center items-center block mt-3">
+        Don't have an account?
+        <a class="text-[#FEB854] cursor-pointer" routerLink="/auth/signup">Sign Up</a>
+      </span>
+
+      <p *ngIf="loginError" class="text-red-500 text-center mt-3">
+        {{ loginError }}
+      </p>
+    </form>
+  </div>
+</div>
