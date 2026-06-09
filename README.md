@@ -1,59 +1,86 @@
 # NewThinkCompared
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.3.3.
+NewThinkCompared is a modern Angular storefront and product comparison web application. It uses Angular 20, Angular Material, Tailwind CSS, and FontAwesome to deliver a responsive and polished shopping experience.
+
+## Project overview
+
+- Built with Angular 20 and standalone component/module architecture.
+- Uses Angular Material and FontAwesome for UI components and icons.
+- Includes Tailwind CSS and `@tailwindcss/postcss` for utility-based styling.
+- Contains feature modules for landing, categories, products, authentication, and contact pages.
+- Includes shared components for pagination, product cards, search bar, and help sections.
+- Includes `db.json` for local mock backend data via `json-server`.
+
+## Features
+
+- Landing page with highlights and featured products.
+- Category browsing and category-specific views.
+- Product listing, filtering, search, and comparison UI.
+- Authentication modules for sign-in and sign-up flows.
+- Contact form page for user inquiries.
+- Modular routing with lazy-loaded feature modules.
+- Shared core and layout services, guards, and reusable components.
+
+## Project structure
+
+- `src/app/core` — core services, guards, layout components, and shared providers.
+- `src/app/features/landing` — home page and landing content.
+- `src/app/features/category` — category pages and category browsing.
+- `src/app/features/product` — product listing, filters, and comparison features.
+- `src/app/features/auth` — authentication pages and routing.
+- `src/app/features/contact-us` — contact page and form.
+- `src/app/shared` — reusable UI components used across the app.
+
+## Prerequisites
+
+- Node.js 18 or later
+- npm 10 or later
+- Angular CLI (optional, for running CLI commands directly)
+
+## Setup
+
+Install dependencies:
+
+```bash
+npm install
+```
 
 ## Development server
 
-To start a local development server, run:
+Run the application locally:
 
 ```bash
-ng serve
+npm start
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Open your browser at `http://localhost:4200/`.
 
-## Code scaffolding
+## Build
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+Build the production bundle:
 
 ```bash
-ng generate component component-name
+npm run build
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+The built files are stored in the `dist/` directory.
+
+## Testing
+
+Run unit tests:
 
 ```bash
-ng generate --help
+npm test
 ```
 
-## Building
+## Optional mock API
 
-To build the project run:
+This repository includes `db.json`, which can be used with `json-server` as a mock backend.
 
 ```bash
-ng build
+npx json-server --watch db.json --port 3000
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+Adjust the application API endpoint if needed to point to the mock API.
 
-## Running unit tests
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
